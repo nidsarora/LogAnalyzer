@@ -92,6 +92,7 @@ def ques_3(input_folder,input_folder2):
 
  csv_data1 = AllUsers11.map(lambda l: l.split(" "))
  row_data1 = csv_data1.map(lambda p: Row(
+    host=(p[3]),
     user=(p[10]),
     user_id=(p[7])
     )
@@ -100,6 +101,7 @@ def ques_3(input_folder,input_folder2):
  #rowdata1.distinct.collect().foreach(println)
  csv_data2 = AllUsers22.map(lambda l: l.split(" "))
  row_data2 = csv_data2.map(lambda p: Row(
+    host=(p[3]),
     user=(p[10]),
     user_id2=(p[7])
     
@@ -172,9 +174,21 @@ def ques_7(input_folder,input_folder2):
         from table1 inner join table2\
         on table1.user = table2.user\
         where table1.user != 'user' " )).show()  
-  
+
+def ques_8(input_folder,input_folder2):
+ table1_df, table2_df = ques_3(input_folder,input_folder2)
+ table1_df.registerTempTable("table1") 
+ table2_df.registerTempTable("table2") 
+ queryResult=(sqlContext
+                      .sql("select distinct table1.user,table1.host\
+                            from  table1 union select distinct table2.user,table2.host  where not exists (select distinct table1.user\
+        from table1 inner join table2\
+        on table1.user = table2.user\
+        where table1.user != 'user' )")).show() 
+                    
 if(question_num=='1'):
- ques_1(input_folder, input_folder2)
+ ques_1(input_folder, input_folder2)    
+
 
 if(question_num=='2'):
  ques_2(input_folder,input_folder2)
@@ -194,4 +208,6 @@ if(question_num=='6'):
 if(question_num=='7'):
  ques_7(input_folder,input_folder2)
 
+if(question_num=='8'):
+ ques_8(input_folder,input_folder2)
  
