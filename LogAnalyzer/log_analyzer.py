@@ -14,10 +14,13 @@ conf = SparkConf().setAppName("wordcount1").setMaster("local")
 sc = SparkContext(conf=conf)
 sqlContext = SQLContext(sc)
 
+
+iliad_file_path='file:////home/nids/LogAnalyzer/LogAnalyzer/'  #define the file path of iliad 
+odyssey_file_path='file:////home/nids/LogAnalyzer/LogAnalyzer/'#define the file path of odyssey 
 simple_txt=sys.argv[1]
 question_num=sys.argv[2]
-input_folder='file:////home/nids/LogAnalyzer/LogAnalyzer/' +sys.argv[3]
-input_folder2='file:////home/nids/LogAnalyzer/LogAnalyzer/' +sys.argv[4]
+input_folder=iliad_file_path +sys.argv[3]
+input_folder2=odyssey_file_path +sys.argv[4]
 
 def g(x):
  print x
