@@ -30,5 +30,9 @@ Python  Program to analyze the logs of the given input files
 
 **Notes**
 1.Java Version needed -Java 8
+
 2.Hadoop 2.7.3
+
 3.Spark
+
+4.Programming language used :Python  
